@@ -1,0 +1,174 @@
+#include <Servo.h>
+
+ 
+
+Servo motorR;
+
+Servo motorL;
+
+ 
+
+boolean f;
+
+boolean b;
+
+boolean r;
+
+boolean l;
+
+ 
+
+ 
+
+void setup() {
+
+  
+
+  motorL.attach(10);
+
+  motorR.attach(11);
+
+  
+
+  // initialize serial:
+
+  Serial.begin(9600);
+
+  // initialize the led pin
+
+}
+
+ 
+
+void loop() {
+
+  while (Serial.available()) {
+
+    char inChar = (char)Serial.read();
+
+    switch(inChar) {
+
+      case '0':
+
+        f = true;
+
+        b = false;
+
+        r = false;
+
+        l = false;
+
+      break;
+
+      case '1':
+
+        f = false;
+
+        b = true;
+
+        r = false;
+
+        l = false;
+
+      break;
+
+      case '2':
+
+        f = false;
+
+        b = false;
+
+        r = true;
+
+        l = false;
+
+      break;
+
+      case '3':
+
+        f = false;
+
+        b = false;
+
+        r = false;
+
+        l = true;
+
+      break;
+
+      case '4':
+
+        f = false;
+
+        b = false;
+
+        r = false;
+
+        l = false;
+
+      break;
+
+    }
+
+    Serial.println(inChar);
+
+  }
+
+  
+
+ if(f == true){forward();}
+
+ else if(b == true){backward();}
+
+ else if(r == true){right();}
+
+ else if(l == true){left();}
+
+ else{
+
+   motorL.write(93);
+
+   motorR.write(93);
+
+   motorL.write(92);
+
+   motorR.write(94);
+
+   }
+
+}
+
+ 
+
+void backward(){
+
+motorR.write(180);
+
+motorL.write(0);
+
+}
+
+ void forward(){
+
+motorL.write(180);
+
+motorR.write(0);
+
+}
+
+ void left(){
+
+motorL.write(0);
+
+motorR.write(0);
+
+}
+
+ void right(){
+
+motorL.write(180);
+
+motorR.write(180);
+
+}
+
