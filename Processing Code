@@ -1,0 +1,93 @@
+import processing.serial.*;
+
+Serial port;
+
+ 
+
+void setup(){
+
+size(500,500);
+
+port = new Serial(this, "/dev/tty.HC-06-DevB", 9600);
+
+}
+
+ 
+
+void draw(){
+
+background(64,173,112);
+
+fill(6,46,124);
+
+rect(100,110,80,80);
+
+rect(190,200,80,80);
+
+rect(10,200,80,80);
+
+rect(100,290,80,80);
+
+fill(216,63,63);
+
+rect(350,200,100,100);
+
+}
+
+ 
+
+void mousePressed(){
+
+  if (withinParameters(350,200,100,100)){
+
+  port.write('4');
+
+  }
+
+  if (withinParameters(100,110,80,80)){
+
+  port.write('0');
+
+  }
+
+  if (withinParameters(100,290,80,80)){
+
+  port.write('1');
+
+  }
+
+  if (withinParameters(190,200,80,80)){
+
+  port.write('2');
+
+  }
+
+  if (withinParameters(10,200,80,80)){
+
+  port.write('3');
+
+  }
+
+  
+
+}
+
+ 
+
+boolean withinParameters(int x, int y, int w, int h){
+
+if(mouseX < x + w
+
+&& mouseX > x
+
+&& mouseY < y + h
+
+&& mouseY > y){
+
+  return true;
+
+}
+
+else{return false;}
+
+}
